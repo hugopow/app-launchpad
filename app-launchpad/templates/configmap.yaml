@@ -23,13 +23,13 @@ data:
 
     EOF
 
-
+    # Run again to accept any previous connections with VCD
     cat << EOF | alp connect --sa-user {{ .Values.alpConnect.saUser }} --sa-pass '{{ .Values.alpConnect.saPass }}' --url {{ .Values.alpConnect.url }} --admin-user {{ .Values.alpConnect.adminUser }} --admin-pass '{{ .Values.alpConnect.adminPass }}' --mqtt
     yes
 
     EOF
     
-
+    # Run again to accept the TLS certificate
     cat << EOF | alp connect --sa-user {{ .Values.alpConnect.saUser }} --sa-pass '{{ .Values.alpConnect.saPass }}' --url {{ .Values.alpConnect.url }} --admin-user {{ .Values.alpConnect.adminUser }} --admin-pass '{{ .Values.alpConnect.adminPass }}' --mqtt
     yes
 
