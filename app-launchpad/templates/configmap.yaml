@@ -3,4 +3,47 @@ kind: ConfigMap
 metadata:
   name: scripts-configmap
 data:
-{{ (.Files.Glob "scripts/run-alp.sh").AsConfig | indent 2 }}
+  run-alp.sh: |-
+    #!/bin/sh
+    # Script to run App Launchpad as a container, use at your own risk, no support is given.
+    # Clean up previous installations
+    rpm -e vmware-alp
+    
+    rm -rf /etc/ALPEnvironments
+    rm -rf /etc/ALPSystem
+    rm -rf /opt/vmware/alp
+
+    # Install ALP
+    rpm -ivh /home/vmware-alp-2.1.1-19234432.ph3.x86_64.rpm
+
+    # Setup ALP connections
+    echo Setup ALP connections
+    cat << EOF | alp connect --sa-user {{ .Values.saUser }} --sa-pass '{{ .Values.saPass }}' --url {{ .Values.url }} --admin-user {{ .Values.adminUser }} --admin-pass '{{ .Values.adminPass }}' --mqtt
+    accept
+
+    EOF
+
+
+    cat << EOF | alp connect --sa-user {{ .Values.saUser }} --sa-pass '{{ .Values.saPass }}' --url {{ .Values.url }} --admin-user {{ .Values.adminUser }} --admin-pass '{{ .Values.adminPass }}' --mqtt
+    yes
+
+    EOF
+    
+
+    cat << EOF | alp connect --sa-user {{ .Values.saUser }} --sa-pass '{{ .Values.saPass }}' --url {{ .Values.url }} --admin-user {{ .Values.adminUser }} --admin-pass '{{ .Values.adminPass }}' --mqtt
+    yes
+
+    EOF
+
+    # Start deployer service
+    mkdir -p /opt/vmware/alp/deployer
+    cd /opt/vmware/alp/deployer
+    nohup /opt/vmware/alp/bin/deployer 2>&1 &
+    sleep 5
+
+    # Start ALP service
+    echo Start ALP service
+    cd /opt/vmware/alp
+    nohup java $(cat /opt/vmware/alp/ALPJavaEnvironments | grep -Ev '^$|[#;]' | xargs) -jar /opt/vmware/alp/alp.jar --logging.path=log 2>&1 &
+
+    tail -f /opt/vmware/alp/log/alp-default.log -f /opt/vmware/alp/deployer/log/deployer/default.log
