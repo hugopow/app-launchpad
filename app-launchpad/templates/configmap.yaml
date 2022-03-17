@@ -36,6 +36,7 @@ data:
     EOF
 
     # Start deployer service
+    echo start ALP Deployer service
     mkdir -p /opt/vmware/alp/deployer
     cd /opt/vmware/alp/deployer
     nohup /opt/vmware/alp/bin/deployer 2>&1 &
