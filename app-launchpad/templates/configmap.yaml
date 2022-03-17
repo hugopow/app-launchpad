@@ -18,19 +18,19 @@ data:
 
     # Setup ALP connections
     echo Setup ALP connections
-    cat << EOF | alp connect --sa-user {{ .Values.saUser }} --sa-pass '{{ .Values.saPass }}' --url {{ .Values.url }} --admin-user {{ .Values.adminUser }} --admin-pass '{{ .Values.adminPass }}' --mqtt
+    cat << EOF | alp connect --sa-user {{ .Values.alpConnect.saUser }} --sa-pass '{{ .Values.alpConnect.saPass }}' --url {{ .Values.alpConnect.url }} --admin-user {{ .Values.alpConnect.adminUser }} --admin-pass '{{ .Values.alpConnect.adminPass }}' --mqtt
     accept
 
     EOF
 
 
-    cat << EOF | alp connect --sa-user {{ .Values.saUser }} --sa-pass '{{ .Values.saPass }}' --url {{ .Values.url }} --admin-user {{ .Values.adminUser }} --admin-pass '{{ .Values.adminPass }}' --mqtt
+    cat << EOF | alp connect --sa-user {{ .Values.alpConnect.saUser }} --sa-pass '{{ .Values.alpConnect.saPass }}' --url {{ .Values.alpConnect.url }} --admin-user {{ .Values.alpConnect.adminUser }} --admin-pass '{{ .Values.alpConnect.adminPass }}' --mqtt
     yes
 
     EOF
     
 
-    cat << EOF | alp connect --sa-user {{ .Values.saUser }} --sa-pass '{{ .Values.saPass }}' --url {{ .Values.url }} --admin-user {{ .Values.adminUser }} --admin-pass '{{ .Values.adminPass }}' --mqtt
+    cat << EOF | alp connect --sa-user {{ .Values.alpConnect.saUser }} --sa-pass '{{ .Values.alpConnect.saPass }}' --url {{ .Values.alpConnect.url }} --admin-user {{ .Values.alpConnect.adminUser }} --admin-pass '{{ .Values.alpConnect.adminPass }}' --mqtt
     yes
 
     EOF
