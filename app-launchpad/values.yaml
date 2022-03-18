@@ -21,7 +21,8 @@ alpConnect:
   adminUser: administrator@system
   adminPass: Vmware1!
   mqtt: true
-
+  eula: 
+# If you accept the EULA then type "accept" in the EULA key value to install ALP.
 
 
 imagePullSecrets: []
