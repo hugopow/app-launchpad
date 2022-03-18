@@ -47,4 +47,5 @@ data:
     cd /opt/vmware/alp
     nohup java $(cat /opt/vmware/alp/ALPJavaEnvironments | grep -Ev '^$|[#;]' | xargs) -jar /opt/vmware/alp/alp.jar --logging.path=log 2>&1 &
 
+    sleep 5
     tail -f /opt/vmware/alp/log/alp-default.log -f /opt/vmware/alp/deployer/log/deployer/default.log
