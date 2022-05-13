@@ -14,7 +14,7 @@ data:
     rm -rf /opt/vmware/alp
 
     # Install ALP
-    rpm -ivh /home/vmware-alp-2.1.1-19234432.ph3.x86_64.rpm
+    rpm -ivh /home/vmware-alp-2.1.1-19783216.ph3.x86_64.rpm
 
     # Setup ALP connections
     echo Setup ALP connections
